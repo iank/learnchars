@@ -15,6 +15,7 @@ wordfreq = "^3.0.2"
 pytest = "^7.1.3"
 flake8 = "^5.0.4"
 flake8-bugbear = "^22.9.23"
+pytest-datafiles = "^2.0.1"
 
 [build-system]
 requires = ["poetry-core"]
