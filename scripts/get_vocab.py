@@ -5,30 +5,33 @@
 - Print five most common words containing that character from wordfreq
 """
 import sys
+import argparse
 import wordfreq
 from pathlib import Path
 from learnchars.skritter import import_from_tsv
 from learnchars.chars import get_next_character
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2 and len(sys.argv) != 3:
-        sys.exit("Usage: {} filename.tsv [n]".format(sys.argv[0]))
+    p = argparse.ArgumentParser(description='Generate a list of vocabulary words to learn')
+    p.add_argument('filename', type=Path, metavar='filename.tsv', help='path to Skritter tsv')
+    p.add_argument('n', type=int, nargs='?', default=1, help='# new characters to learn')
+    p.add_argument('-w', '--words', type=int, default=5, help='# words for each character')
+    args = p.parse_args()
 
-    tsv_file = Path(sys.argv[1])
-    chars = import_from_tsv(tsv_file)
+    if not args.filename.is_file():
+        sys.exit("Path to vocabulary list does not exist or is not a file")
 
-    if len(sys.argv) == 3:
-        try:
-            n = int(sys.argv[2])
-        except ValueError as e:
-            sys.exit("Second argument must be numeric")
-    else:
-        n = 1
-
-    if n < 1:
+    if args.n < 1:
         sys.exit("n must be >= 1")
 
-    next_chars = get_next_character(chars, n)
+    if args.words < 0:
+        sys.exit("words must be >= 0")
+
+    # Import vocabulary list
+    chars = import_from_tsv(args.filename)
+
+    # Find [n] unknown characters and [words] new words per character
+    next_chars = get_next_character(chars, args.n)
     for (next_char, rank) in next_chars:
         print("Next unknown character: {} (rank: {})".format(next_char, rank))
 
@@ -40,5 +43,5 @@ if __name__ == '__main__':
                     found_words, word, wordfreq.word_frequency(word, "zh"))
                 )
 
-            if found_words == 5:
+            if found_words == args.words:
                 break
