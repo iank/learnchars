@@ -11,3 +11,7 @@ This is a tool to help me pick vocabulary words to learn
 poetry run pytest
 poetry run flake8
 poetry install
+
+# License
+
+MIT License. Please see [wordfreq](https://github.com/rspeer/wordfreq) for information about licensing and attribution for the data sources distributed with that module.
