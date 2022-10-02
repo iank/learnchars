@@ -8,15 +8,14 @@ FIXTURE_DIR = os.path.join(
     'test_files',
 )
 
-"""
-This tests the retrieval of the next most common unknown character
-"""
-
 
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'test_nextchar.tsv'),
 )
 def test_nextchar(datafiles):
+    """
+    This tests the retrieval of the next most common unknown character
+    """
     assert (datafiles / 'test_nextchar.tsv').check(file=1)
     chars = import_from_tsv((datafiles / 'test_nextchar.tsv').realpath())
     next_char = get_next_character(chars)
@@ -24,15 +23,13 @@ def test_nextchar(datafiles):
     assert next_char == [('人', 7)]
 
 
-"""
-This tests the retrieval of the next N most common characters
-"""
-
-
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'test_nextchar.tsv'),
 )
 def test_nextchar_n(datafiles):
+    """
+    This tests the retrieval of the next N most common characters
+    """
     assert (datafiles / 'test_nextchar.tsv').check(file=1)
     chars = import_from_tsv((datafiles / 'test_nextchar.tsv').realpath())
     next_char = get_next_character(chars, n=2)
