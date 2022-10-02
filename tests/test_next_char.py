@@ -9,7 +9,7 @@ FIXTURE_DIR = os.path.join(
 )
 
 """
-This tests the retrieval of the next most common unknown character from SUBTLEX-CH
+This tests the retrieval of the next most common unknown character
 """
 
 
@@ -21,4 +21,20 @@ def test_nextchar(datafiles):
     chars = import_from_tsv((datafiles / 'test_nextchar.tsv').realpath())
     next_char = get_next_character(chars)
 
-    assert next_char == ('人', 7)
+    assert next_char == [('人', 7)]
+
+
+"""
+This tests the retrieval of the next N most common characters
+"""
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'test_nextchar.tsv'),
+)
+def test_nextchar_n(datafiles):
+    assert (datafiles / 'test_nextchar.tsv').check(file=1)
+    chars = import_from_tsv((datafiles / 'test_nextchar.tsv').realpath())
+    next_char = get_next_character(chars, n=2)
+
+    assert next_char == [('人', 7), ('我', 9)]
