@@ -267,10 +267,18 @@ cjk = ["ipadic (>=1.0.0,<2.0.0)", "jieba (>=0.42)", "mecab-ko-dic (>=1.0.0,<2.0.
 jieba = ["jieba (>=0.42)"]
 mecab = ["ipadic (>=1.0.0,<2.0.0)", "mecab-ko-dic (>=1.0.0,<2.0.0)", "mecab-python3 (>=1.0.5,<2.0.0)"]
 
+[[package]]
+name = "zhon"
+version = "1.1.5"
+description = "Zhon provides constants used in Chinese text processing."
+category = "main"
+optional = false
+python-versions = "*"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "05529a741cd0b6d6a0b3c20599a079fb3055045248b96d7907515b5ecd1ee8b8"
+content-hash = "9bff1cb62adedf8bba0391170b117b851c19409e35156a3c1eb40a40796d50f1"
 
 [metadata.files]
 attrs = [
@@ -524,4 +532,7 @@ wcwidth = [
 wordfreq = [
     {file = "wordfreq-3.0.2-py3-none-any.whl", hash = "sha256:c5bfdf26cc26437d670ef145326e4e395cf0a4f4de2da85a331ddf3d2a334588"},
     {file = "wordfreq-3.0.2.tar.gz", hash = "sha256:104a1b975297317110f8d429d68c333cb828b7c7fad59fcae0b7615060d1d083"},
+]
+zhon = [
+    {file = "zhon-1.1.5.tar.gz", hash = "sha256:793723575c46f10ace8846c579ce740b04c73e2aa583e04e000aedbd4a47f87f"},
 ]
