@@ -14,7 +14,7 @@ This is a tool to help me pick vocabulary words to learn
 
 # Usage
 
-    get_vocab.py [-h] [-w WORDS] filename.tsv [n]
+    get_vocab.py [-h] [-w WORDS] [-c CHAR] filename.tsv [n]
     get_sentences.py [-h] [-c CHARS] filename.tsv sentences.tsv
     analyze_text.py [-h] [-k] filename.tsv textfile.txt
 
