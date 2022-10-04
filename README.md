@@ -14,11 +14,15 @@ This is a tool to help me pick vocabulary words to learn
 
 # Usage
 
-    scripts/get_vocab.py /path/to/skritter_export.tsv [n]
+    get_vocab.py [-h] [-w WORDS] filename.tsv [n]
+    get_sentences.py [-h] [-c CHARS] filename.tsv sentences.tsv
+    analyze_text.py [-h] [-k] filename.tsv textfile.txt
 
-# Example
+# Examples
 
-## Get the three next most common unknown-to-me characters, as well as 5 words containing each
+## Pick words to learn
+
+Get the three next most common unknown-to-me characters, as well as 5 words containing each:
 
     (zhongwen) ~/learnchars$ ./scripts/get_vocab.py ~/skritter-export-all-2022-10-02_08_01.tsv 3
     Next unknown character: 而 (rank: 36)
@@ -44,11 +48,29 @@ This is a tool to help me pick vocabulary words to learn
     #4:     内部    (0.000148)
     #5:     部      (0.000145)
 
-## Get a list of sentences comprised entirely of charactres I know, plus a new character ('并')
+## Find example sentences
+
+Get a list of sentences comprised entirely of charactres I know, plus a new character ('并'):
 
     (zhongwen) ~/learnchars$ ./scripts/get_sentences.py ~/skritter-export-all-2022-10-04_09_50.tsv ~/sentences.tsv -c '并' |grep '并没'
     我并没有从那本小说里得到多少乐趣。 - wǒ bìng méiyǒu cóng nà běn xiǎoshuō lǐ dédào duōshao lèqù - I didn't get much enjoyment out of that novel.
     “早上好。”我说，但他并没有回答我的问候。 - zǎoshanghǎo wǒ shuō dàn tā bìng méiyǒu huídá wǒ de wènhòu - Good morning,"" I said, but he didn't return the greeting.
+
+## Analyze text
+
+List the unknown characters in a text file, sorted by frequency:
+
+    (zhongwen) ~/learnchars$ ./scripts/analyze_text.py ~/skritter-export-all-2022-10-04_09_50.tsv 活着.txt |head
+    character: count
+     霞: 463
+     凤: 462
+     庆: 329
+     爹: 206
+     队: 194
+     娘: 189
+     村: 167
+     口: 156
+     跑: 153
 
 # License
 
