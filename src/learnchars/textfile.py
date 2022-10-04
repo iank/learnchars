@@ -12,6 +12,8 @@ def analyze_frequency(filename):
 
             if c not in zhon.cedict.all:
                 continue
+            if c == '、':  # evidently the enumeration comma is in cedict
+                continue
 
             if c in chars:
                 chars[c] = chars[c] + 1
