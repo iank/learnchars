@@ -25,3 +25,8 @@ def analyze_frequency(filename):
         ordered_chars[char] = count
 
     return ordered_chars
+
+
+def count_characters(filename):
+    chars = analyze_frequency(filename)
+    return sum(chars.values())

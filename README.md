@@ -16,7 +16,7 @@ This is a tool to help me pick vocabulary words to learn
 
     get_vocab.py [-h] [-w WORDS] [-c CHAR] filename.tsv [n]
     get_sentences.py [-h] [-c CHARS] filename.tsv sentences.tsv
-    analyze_text.py [-h] [-k] filename.tsv textfile.txt
+    analyze_text.py [-h] [-k | -p PERCENT] filename.tsv textfile.txt
 
 # Examples
 
@@ -56,7 +56,7 @@ Get a list of sentences comprised entirely of charactres I know, plus a new char
     我并没有从那本小说里得到多少乐趣。 - wǒ bìng méiyǒu cóng nà běn xiǎoshuō lǐ dédào duōshao lèqù - I didn't get much enjoyment out of that novel.
     “早上好。”我说，但他并没有回答我的问候。 - zǎoshanghǎo wǒ shuō dàn tā bìng méiyǒu huídá wǒ de wènhòu - Good morning,"" I said, but he didn't return the greeting.
 
-## Analyze text
+## Analyze text: character count
 
 List the unknown characters in a text file, sorted by frequency:
 
@@ -71,6 +71,20 @@ List the unknown characters in a text file, sorted by frequency:
      村: 167
      口: 156
      跑: 153
+
+## Analyze text: coverage %
+
+List the characters that would be required to reach X% "character coverage" for a given text:
+
+    (zhongwen) ~/learnchars$ ./scripts/analyze_text.py ~/skritter-export-all-2022-10-04_09_50.tsv 秃秃大王.txt -p .88
+    Input file contains 33738 total characters
+    For 88.00% comprehension, you must know 29690
+    You currently know 29399/29690 (87.14%)
+    Characters to learn to reach 88.00% character coverage
+     汪: 86
+     代: 80
+     扑: 74
+     巴: 70
 
 # License
 
