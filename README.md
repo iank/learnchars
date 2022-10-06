@@ -115,9 +115,9 @@ Summarize the 1000 most frequently-used characters. Known characters are display
 Summarize the 1000 most frequently-used characters. Inversion of the previous example- Known characters are blanks, unknown characters are displayed:
 
     (zhongwen) ~/learnchars$ ./scripts/progress.py ~/skritter-export-all-2022-10-06_12_49.tsv 1000 -i
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　战　　　　政
+    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　战　　　　政
     　　　　　　　　产　　　　　　　　斯　　合　　代　　　　　　　　　度　任　　　通　　原　　　立及　员
     　　　　论处　义各入　口　　　　　　　尔　　　　　　　　何　　　　　　　反受　　　　　建务　　　　　
     计管　　　德资　　金　　　统区保至队形社　　　　展　科　　基　　　则　　却　　　　强即　　　权　　象
