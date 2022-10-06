@@ -49,9 +49,13 @@ def display_progress(known_characters, n=1000, invert=False):
         known_format = '\u3000'
         unknown_format = '{}'
 
+    print('一' * (LINE_WIDTH + 2))
     remaining = n
     pos = 0
     for (char, _) in character_list():
+        if pos == 0:
+            print('｜', end='')
+
         if char in known_characters:
             print(known_format.format(char), end='')
         else:
@@ -59,9 +63,11 @@ def display_progress(known_characters, n=1000, invert=False):
 
         pos = pos + 1
         if pos == LINE_WIDTH:
-            print('')
+            print('｜')
             pos = 0
 
         remaining = remaining - 1
         if remaining == 0:
             break
+
+    print('一' * (LINE_WIDTH + 2))
