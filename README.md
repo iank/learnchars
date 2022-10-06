@@ -22,17 +22,19 @@ This is a tool to help me pick Chinese vocabulary words to learn
 
 # Motivation
 
-I prefer to learn words, rather than characters in isolation. I also I think it's best to learn vocabulary words in-context. That said, it's a lot easier to look up the meaning of a word if I at least know the characters it's composed of. Then I can just type it instead of having to get out my phone and draw it. So I'd like to be able to pick vocabulary words to learn that happen to include characters I'm likely to encounter.
+I prefer to learn words, rather than characters in isolation. I also I think it's best to learn vocabulary words in-context. That said, it's a lot easier to look up the meaning of a word if I at least know the characters it's composed of. Then I know how it's pronounced and I can just type it instead of having to get out my phone and draw it. So I'd like to be able to pick vocabulary words to learn that happen to include characters I'm likely to encounter.
 
 Just following a list of the most frequently-used *words* doesn't quickly get me through the frequently-used *characters*. And when I do learn a character, I'd like to reinforce it by learning several words which contain that character- even if some of those words aren't very common compared to my current level.
 
 The main tool here is ``get_vocab.py`` which, given a list of characters I know, will find the N next most common unknown-to-me character[s]. It then displays W vocabulary words for each character.
 
-When I learn a word I like to add a sentence containing that word to an Anki deck. ``get_sentences.py`` finds sentences that consist entirely of characters I know, plus an optional list of extra characters to include (such as the ones I have just learned that day). Because this is character-based and not word-based they may still contain words I don't know, which is fine- this is a great time to learn an easy word or two.
+When I learn a word I like to add a sentence containing that word to an Anki deck. ``get_sentences.py`` finds sentences that consist entirely of characters I know, plus an optional list of extra characters to include (such as the ones I have just learned that day). Because this is character-based and not word-based they may still contain words I don't know, which is fine- this is a great time to learn an easy word or two. I didn't include the sentence database with this repository. I'm not sure where it comes from and what licensing/redistribution restrictions may apply.
 
-``analyze_text.py`` is for selecting characters to learn based on a text I'd like to read. It displays characters in order of frequency in that text. I find it helpful to make a copy of the text and globally replace names with some placeholder, like 【名字】. This helps get past the names, which tend to be the most frequent unknown characters in any given text and are usually not characters I'm prioritizing at the moment. Optionally, ``analyze_text.py`` can limit its display to the most frequent characters that would be needed to reach a given percent character coverage; e.g., display only the characters that would be needed to learn to know 98% of the characters in an average sentence/page/chapter of that text.
+``analyze_text.py`` is for selecting characters to learn based on a text I'd like to read. It displays characters in order of frequency in that text. I find it helpful to make a copy of the text and globally replace names with some placeholder, like 【名字】. This helps get past the names, which tend to be the most frequent unknown characters in any given text and are usually not characters I'm prioritizing at the moment.
 
-``progress.py`` is a fun visual. See examples below.
+Optionally, ``analyze_text.py`` can limit its display to the most frequent characters that would be needed to reach a given percent character coverage; e.g., display only the characters that would be needed to learn to know 98% of the characters in an average sentence/page/chapter of that text. There's a long tail in any given actual text and characters with one or two occurrences can be looked up once and forgotten, for now. So I don't wait until 100% coverage before reading.
+
+``progress.py`` is a visual indication of progress. It's just for fun. See examples below.
 
 # Examples
 
