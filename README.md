@@ -101,9 +101,9 @@ List the characters that would be required to reach X% "character coverage" for 
 
 ## Display progress
 
-Summarize the 1000 most frequently-used characters. Known characters are displayed, unknown characters are blanks:
+Summarize the 2500 most frequently-used characters- roughly 99.9% of characters in common usage, according to [Ashwin Purohit's analysis of Google n-gram data](https://puroh.it/how-many-chinese-characters-and-words-are-in-use/). Known characters are displayed, unknown characters are blanks:
 
-    (zhongwen) ~/learnchars$ ./scripts/progress.py ~/skritter-export-all-2022-10-06_12_49.tsv 1000
+    (zhongwen) ~/learnchars$ ./scripts/progress.py ~/skritter-export-all-2022-10-06_12_49.tsv 2500
     的一是不了在人有我他这个们中来上大为和国地到以说时要就出会可也你对生能而子那得于着下自之年过发后作里
     用道行所然家种事成方多经么去法学如都同现当没动面起看定天分还进好小部其些主样理心她本前开但因只从想实
     日军者意无力它与长把机十民第公此已工使情明性知全三又关点正业外将两高间由问很最重并物手应　向头文体　
@@ -124,30 +124,36 @@ Summarize the 1000 most frequently-used characters. Known characters are display
     　鱼　　　　　　楚　　败　　梦　　困剑　　救贵　　楼　　　　　朋画班　　　　短　　　　　松　谢　遇　
     　　　销钟　　　剧票　　　　旧　　　录　春　附　　　　雨呀板　　　睛饭　　　输　　婚　　　　　油　旅
     　　　　　笔　　词　择　　睡博　烟　　　　　　卖　　载　健堂旁宫喝借　　　园　　　　　　　　牙束　　
-
-Summarize the 1000 most frequently-used characters. Inversion of the previous example- Known characters are blanks, unknown characters are displayed:
-
-    (zhongwen) ~/learnchars$ ./scripts/progress.py ~/skritter-export-all-2022-10-06_12_49.tsv 1000 -i
+    　　雪午练　爷　　　馆　　　　　　牛　纸　　　　　　翻　　　　　戏　　　　　　　店　　典　　　　　爸
+    　　　　　忘　　　　　　　赛趣　　床　冰　玩　　　　　　　　努　　　　　　绿兄　　　　　　　　　　　
+    街　　　　　　麻　　　　　　灯　　　　　　　　　　夏　　　　折　　　　　　　　　　　　　圆　　　姓　
+    秋　迷　　　　　　　　　　　　　　　　　　　　　　订　抽　　　　喊　妹　　　　　　　桌　　　　译　　
+    　　　　　　　课　哭懂　　　　　厅　　　　　　　　惯　戴　　　　　绍　　　　　　　丈　　　　洗　　　
+    镜　烦签仙彼　　　　　　　　　菜　　　　　茶　　　　　奶季　狗　　　　珠　　　宜　　　　　繁寒　　　
+    　　　　　聚　　　袋　　　珍　　　　　　　　累　　　　　　　　　　孤　　　　　　　零　　码　　　　　
+    腿　　　　　　　　　　　　　　　　　　　　　　　　　净　　　　　　冬　　蛋　　　鸡　　　　杯租骑　　
+    　　　　　　　　　　　　　　肩　　　　　　叔　　　爬　　　　　　　　扫　　　　　　　　　　　　　　　
+    　番　　漫酸　　舒　　　辛　　　　　　　　　　　昨　　　　　　　　　　　　乔　　　　　　　　　粉　　
+    　　　　　　佩　　　　　　　　　　　　　堡　　　　　　　　　　　　　　　　　　　　　　　　　绩　　　
+    瞧　　　　　　锁　　　　　　　　　漂　　　　　　　　幼　　　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　汤　　　　　　　　　　　　　　　脏　　　　丢　　　　　　　　　　　
+    　邮　　　　　咬邻　　　椅　　　　　　　　梯猫　　　　　　　　　　　　袖　　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　熊恭　　　　　　　　
+    　　　　　　　　　　　　　　　搬　　　　　　　　　　　　　　　　　　　　　　　　　　豆　　　　　　　
+    　　　　　　　　绘　　　　　　　　　　　　　　刷　　瓜　　闷　　　　　赢　　　　瘦　　　　　　址　　
+    　　　　　　　　　　　　　　　斤　　　　　　　　　汪　　　　　　　　盐　　　　　　　　　　　　　　　
+    　　　　　　　　　　　　哦　　　　　　　　　　　　　　笼　　　聊　　　　　　　　膀　　卧　　　　　函
+    　　　　　　　　　　　　　　　　　晴　　　　　　　　　　　炉　　　　　　　喂　　　　　柜　　　　　　
+    　　　　　　　　　　　　　　　　　　　甜　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　　　　　　　　　　　　盲　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　厨　　　　　　　　　　　　　　　　　　
     　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　战　　　　政
-    　　　　　　　　产　　　　　　　　斯　　合　　代　　　　　　　　　度　任　　　通　　原　　　立及　员
-    　　　　论处　义各入　口　　　　　　　尔　　　　　　　　何　　　　　　　反受　　　　　建务　　　　　
-    计管　　　德资　　金　　　统区保至队形社　　　　展　科　　基　　　则　　却　　　　强即　　　权　　象
-    　设式　　　　品　　　　　程　　　　　　规万　　　　　术领共确传　　　　　　　　　带　争　　　　步　
-    　　　造　联持组　济　亲　林　　　　　　　　　　失　　令　布　　　存未　　　　　具罗　　　　备　连　
-    深　　　团　　需　　党华　　　整府　况亚　技　　示　病息究线似　　断精　支　　　器　　　　增研　　企
-    　　　　　　委　　　　　曾　农　　广显　　　标　　　念　引　首　局　　　　尽另　　　　仅　　　随　列
-    武　　　　势　　古众构　　　土投某案　维革划敌致　律足态　　　派　验责营　够章　　志底　严巴例防族供
-    效续施　　型料　　　　绝　察　　　依批群　　按　　　　织　斗　　　纪采举杀攻　　　低朝　　止细　　　
-    仍　　破　　　倒　属　帝限船脸　速刻　否　威毛状率甚　球　普　弹　　创　　　承印　兰　股　　预　益　
-    　　微尼继　　血惊伤素药　波　省　　　源　险待述陆　置　劳　　　福纳　雷警获模　负云停　　　树疑　　
-    洲冲射略范竟　　异激　村哈策　　　罪判　州　　既　　宗积余痛　　富灵协　占配征　皮挥胜降阶审沉坚善　
-    刘　　超　压　　皇养伊怀执副乱抗犯追　宣佛　航优　　著田铁控税　　份　艺背阵　脚　恶　顿　守酒岛托央
-    　烈洋　索胡　靠评版宝座释　　　　　互付伯慢欧　闻危　核暗　　　讨丽良序　监临　露　呼味野架域沙掉括
-    舰　杂误湾吉减编　肯测　屋跑　散温　　渐封　　枪缺　县尚毫移娘　　　智亦耳恩　掌恐遗固席　秘　鲁　康
-    虑幸均　　诗藏赶　　损忽巨炮　端探湖　叶　乡　吸予礼港　　　庭妇归　　额含顺　摇招　脱补谓督毒　疗　
-    泽材灭逐莫　亡鲜　圣　寻厂　　勒　授诺伦岸奥唐　俄炸　洛　　　　　　君禁阴　谋宋避抓荣姑孙逃　　跳顶
+    　　　　　　　　　　狮　　　　　　　　　　　　舟　　　　　　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　堵　　姨　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　　　　　　　　　啡泼　　　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　饼　　　　　　　荐　　　　　咳　　　　　咖　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　　　桶　　　　　　　　辣　宠　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+    　　　　　　　　　　　　　　　　　　　　　　　　　　　苹　　　　　　　　　　　　　　　　　　　　　　
 
 # License
 
