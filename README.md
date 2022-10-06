@@ -2,11 +2,6 @@
 
 This is a tool to help me pick Chinese vocabulary words to learn
 
-- Import known words/characters from [Skritter](https://skritter.com) tsv
-- Find next most frequent character in [Jun Da's List](https://lingua.mtsu.edu/chinese-computing/statistics/char/list.php?Which=MO)
-- Find top N most frequent words with that character in [wordfreq](https://pypi.org/project/wordfreq/)'s corpus. Return words and frequency scores.
-- Summarize learning progress of N most frequent characters
-
 # Building
 
     poetry run pytest
@@ -26,7 +21,7 @@ I prefer to learn words, rather than characters in isolation. I also I think it'
 
 Just following a list of the most frequently-used *words* doesn't quickly get me through the frequently-used *characters*. And when I do learn a character, I'd like to reinforce it by learning several words which contain that character- even if some of those words aren't very common compared to my current level.
 
-The main tool here is ``get_vocab.py`` which, given a list of characters I know, will find the N next most common unknown-to-me character[s]. It then displays W vocabulary words for each character.
+The main tool here is ``get_vocab.py`` which, given a list of characters I know, will find the N next [most common](https://lingua.mtsu.edu/chinese-computing/statistics/char/list.php?Which=MO) unknown-to-me character[s]. It then displays W vocabulary words for each character, roughly in frequency order from [wordfreq](https://pypi.org/project/wordfreq/)'s corpus.
 
 When I learn a word I like to add a sentence containing that word to an Anki deck. ``get_sentences.py`` finds sentences that consist entirely of characters I know, plus an optional list of extra characters to include (such as the ones I have just learned that day). Because this is character-based and not word-based they may still contain words I don't know, which is fine- this is a great time to learn an easy word or two. I didn't include the sentence database with this repository. I'm not sure where it comes from and what licensing/redistribution restrictions may apply.
 
