@@ -13,6 +13,7 @@ from pathlib import Path
 from learnchars.skritter import import_from_tsv
 from learnchars.textfile import analyze_frequency
 from learnchars.textfile import count_characters
+from learnchars.chars import get_character_rank
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description='Analyze text by characters')
@@ -38,11 +39,11 @@ if __name__ == '__main__':
 
     # If we just want a list of known/unknown characters in the text
     if not args.percent:
-        print("character: count")
+        print("character: count_in_this_text (Jun Da's rank)")
         for char, count in textchars.items():
             if char in known_chars:
                 if args.known:
-                    print("#{}: {}".format(char, count))
+                    print("#{}: {} ({})".format(char, count, get_character_rank(char)))
             else:
                 print(" {}: {}".format(char, count))
 
@@ -76,10 +77,11 @@ if __name__ == '__main__':
         print("Characters to learn to reach {:0.2f}% character coverage".format(
             args.percent * 100
         ))
+        print("character: count_in_this_text (Jun Da's rank)")
         for char, count in textchars.items():
             if must_know <= 0:
                 break
             if char in known_chars:
                 continue
-            print(" {}: {}".format(char, count))
+            print(" {}: {} ({})".format(char, count, get_character_rank(char)))
             must_know = must_know - count

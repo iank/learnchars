@@ -1,8 +1,10 @@
 from pkg_resources import resource_filename
+from functools import lru_cache
 
 CHAR_FREQ_FILENAME = resource_filename("learnchars", "data/junda.tsv")
 
 
+@lru_cache(maxsize=None)
 def character_list():
     chars = []
     with open(CHAR_FREQ_FILENAME) as f:
@@ -71,3 +73,11 @@ def display_progress(known_characters, n=1000, invert=False):
             break
 
     print('一' * (LINE_WIDTH + 2))
+
+
+def get_character_rank(character):
+    for (char, rank) in character_list():
+        if char == character:
+            return rank
+
+    return None

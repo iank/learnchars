@@ -2,6 +2,7 @@ import os
 import pytest
 from learnchars.skritter import import_from_tsv
 from learnchars.chars import get_next_character
+from learnchars.chars import get_character_rank
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
@@ -35,3 +36,10 @@ def test_nextchar_n(datafiles):
     next_char = get_next_character(chars, n=2)
 
     assert next_char == [('人', 7), ('我', 9)]
+
+
+def test_char_rank():
+    """
+    This tests looking up a character's frequency
+    """
+    assert get_character_rank('条') == 214
