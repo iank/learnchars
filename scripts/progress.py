@@ -24,4 +24,5 @@ if __name__ == '__main__':
 
     # Import vocabulary list
     chars = import_from_tsv(args.filename)
-    display_progress(chars, args.n, args.invert)
+    percent = display_progress(chars, args.n, args.invert)
+    print("Known: {:0.2f}".format(percent))

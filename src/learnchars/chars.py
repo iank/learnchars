@@ -39,6 +39,7 @@ def get_next_character(known_characters, n=1):
 
 
 def display_progress(known_characters, n=1000, invert=False):
+    known_count = 0
     LINE_WIDTH = 50
 
     if n < 1:
@@ -60,6 +61,7 @@ def display_progress(known_characters, n=1000, invert=False):
 
         if char in known_characters:
             print(known_format.format(char), end='')
+            known_count = known_count + 1
         else:
             print(unknown_format.format(char), end='')
 
@@ -73,6 +75,7 @@ def display_progress(known_characters, n=1000, invert=False):
             break
 
     print('一' * (LINE_WIDTH + 2))
+    return known_count / n
 
 
 def get_character_rank(character):
