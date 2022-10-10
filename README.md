@@ -165,16 +165,16 @@ Summarize the 2500 most frequently-used characters- roughly 99.9% of characters 
 Find 10 words in HSK 6 that are composed of characters I already know.
 
     learnchars$ ./scripts/easy_words.py ~/skritter-export-all-2022-10-06_12_49.tsv |grep 'HSK 6'|head
-    事件            HSK 6
-    机关            HSK 6
-    位于            HSK 6
-    产业            HSK 6
-    人士            HSK 6
-    现场            HSK 6
-    交易            HSK 6
-    意识            HSK 6
-    体系            HSK 6
-    数              HSK 6
+    事件            HSK 6   event
+    机关            HSK 6   mechanism; gear
+    位于            HSK 6   to be located at
+    产业            HSK 6   industry
+    人士            HSK 6   person
+    现场            HSK 6   the scene (of a crime, accident etc)
+    交易            HSK 6   (business) transaction
+    意识            HSK 6   consciousness
+    体系            HSK 6   system
+    数              HSK 6   frequently
 
 # License/attribution
 
