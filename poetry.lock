@@ -13,6 +13,18 @@ tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900
 tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
+name = "cedict-utils"
+version = "0.0.13"
+description = "A Python parser for the CC-CEDICT Chinese-English dictionary"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+dev = ["check-manifest"]
+test = ["coverage"]
+
+[[package]]
 name = "colorama"
 version = "0.4.5"
 description = "Cross-platform colored terminal text."
@@ -278,12 +290,16 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "9bff1cb62adedf8bba0391170b117b851c19409e35156a3c1eb40a40796d50f1"
+content-hash = "46c62435aaae300ee2e2cb63df14a7e2efe5f78619eef61b440a5785b2a73959"
 
 [metadata.files]
 attrs = [
     {file = "attrs-22.1.0-py2.py3-none-any.whl", hash = "sha256:86efa402f67bf2df34f51a335487cf46b1ec130d02b8d39fd248abfd30da551c"},
     {file = "attrs-22.1.0.tar.gz", hash = "sha256:29adc2665447e5191d0e7c568fde78b21f9672d344281d0c6e1ab085429b22b6"},
+]
+cedict-utils = [
+    {file = "cedict_utils-0.0.13-py3-none-any.whl", hash = "sha256:180f59f1ebb525b4735ac9e723c0ff74a8736f3c822c6852952a931fa10f6c41"},
+    {file = "cedict_utils-0.0.13.tar.gz", hash = "sha256:995e49150c315bb1cf96389c85b478b647bcb8df1eeb31ce3dc6edd6ae7d31d0"},
 ]
 colorama = [
     {file = "colorama-0.4.5-py2.py3-none-any.whl", hash = "sha256:854bf444933e37f5824ae7bfc1e98d5bce2ebe4160d46b5edf346a89358e99da"},

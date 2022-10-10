@@ -10,6 +10,7 @@ readme = "README.md"
 python = "^3.8"
 wordfreq = {extras = ["cjk"], version = "^3.0.2"}
 zhon = "^1.1.5"
+cedict-utils = "^0.0.13"
 
 
 [tool.poetry.group.dev.dependencies]

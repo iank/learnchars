@@ -184,4 +184,6 @@ Character frequency data from https://lingua.mtsu.edu/chinese-computing/statisti
 
 There is an HSK word list from [Cédric Hartland](http://cedric.hartland.free.fr/) distributed with this module. It has a CC BY-NC license.
 
+[CC-CEDICT](https://cc-cedict.org/wiki/) uses a [Creative Commons Attribution-Share Alike 3.0 License](https://creativecommons.org/licenses/by-sa/3.0/)
+
 Use the MIT license for the rest.
