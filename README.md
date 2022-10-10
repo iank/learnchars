@@ -14,6 +14,7 @@ This is a tool to help me pick Chinese vocabulary words to learn
     get_sentences.py [-h] [-c CHARS] filename.tsv sentences.tsv
     analyze_text.py [-h] [-p PERCENT] filename.tsv textfile.txt
     progress.py [-h] [-i] filename.tsv [n]
+    easy_words.py [-h] filename.tsv
 
 # Motivation
 
@@ -30,6 +31,8 @@ When I learn a word I like to add a sentence containing that word to an Anki dec
 Optionally, ``analyze_text.py`` can limit its display to the most frequent characters that would be needed to reach a given percent character coverage; e.g., display only the characters that would be needed to learn to know 98% of the characters in an average sentence/page/chapter of that text. There's a long tail in any given actual text and characters with one or two occurrences can be looked up once and forgotten, for now. So I don't wait until 100% coverage before reading.
 
 ``progress.py`` is a visual indication of progress. It's just for fun. See examples below.
+
+``easy_words.py`` finds words composed of characters I already know, optionally by HSK level.
 
 # Examples
 
@@ -156,6 +159,22 @@ Summarize the 2500 most frequently-used characters- roughly 99.9% of characters 
     ｜　　　　　　　　　　桶　　　　　　　　辣　宠　　　　　　　　　　　　　　　　　　　　　　　　　　　　｜
     ｜　　　　　　　　　　　　　　　　　　　　　　　　　　　苹　　　　　　　　　　　　　　　　　　　　　　｜
     一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一
+
+## Find easy HSK words to learn
+
+Find 10 words in HSK 6 that are composed of characters I already know.
+
+    learnchars$ ./scripts/easy_words.py ~/skritter-export-all-2022-10-06_12_49.tsv |grep 'HSK 6'|head
+    事件            HSK 6
+    机关            HSK 6
+    位于            HSK 6
+    产业            HSK 6
+    人士            HSK 6
+    现场            HSK 6
+    交易            HSK 6
+    意识            HSK 6
+    体系            HSK 6
+    数              HSK 6
 
 # License/attribution
 
