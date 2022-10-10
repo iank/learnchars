@@ -12,7 +12,7 @@ This is a tool to help me pick Chinese vocabulary words to learn
 
     get_vocab.py [-h] [-w WORDS] [-c CHAR] filename.tsv [n]
     get_sentences.py [-h] [-c CHARS] filename.tsv sentences.tsv
-    analyze_text.py [-h] [-k | -p PERCENT] filename.tsv textfile.txt
+    analyze_text.py [-h] [-p PERCENT] filename.tsv textfile.txt
     progress.py [-h] [-i] filename.tsv [n]
 
 # Motivation

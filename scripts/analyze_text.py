@@ -20,10 +20,8 @@ if __name__ == '__main__':
     p.add_argument('filename', type=Path, metavar='filename.tsv', help='path to Skritter tsv')
     p.add_argument('textfile', type=Path, metavar='textfile.txt', help='path to text file')
 
-    group = p.add_mutually_exclusive_group()
-    group.add_argument('-k', '--known', action='store_true', help='include known characters')
-    group.add_argument('-p', '--percent', type=float,
-                       help='print characters needed to learn to reach X%% character coverage')
+    p.add_argument('-p', '--percent', type=float,
+                   help='print characters needed to learn to reach X%% character coverage')
     args = p.parse_args()
 
     if not args.filename.is_file():
@@ -41,10 +39,7 @@ if __name__ == '__main__':
     if not args.percent:
         print("character: count_in_this_text (Jun Da's rank)")
         for char, count in textchars.items():
-            if char in vocab.chars:
-                if args.known:
-                    print("#{}: {} ({})".format(char, count, get_character_rank(char)))
-            else:
+            if char not in vocab.chars:
                 print(" {}: {}".format(char, count))
 
     # Otherwise, show the characters that would be needed to learn in order to
