@@ -4,7 +4,7 @@ import argparse
 import zhon.hanzi
 import string
 from pathlib import Path
-from learnchars.skritter import import_from_tsv
+from learnchars.skritter import Skritter
 
 
 def sentence_known(sentence, chars):
@@ -29,7 +29,8 @@ if __name__ == '__main__':
         sys.exit("Path to sentences does not exist or is not a file")
 
     # Import vocabulary list
-    chars = import_from_tsv(args.filename)
+    vocab = Skritter(args.filename)
+    chars = vocab.chars
     chars |= set(zhon.hanzi.punctuation)
     chars |= set(string.whitespace)
     chars |= set(args.chars)

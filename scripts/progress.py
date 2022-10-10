@@ -5,7 +5,7 @@ Display a summary of learning progress for the N most frequent characters
 import sys
 import argparse
 from pathlib import Path
-from learnchars.skritter import import_from_tsv
+from learnchars.skritter import Skritter
 from learnchars.chars import display_progress
 
 
@@ -23,6 +23,6 @@ if __name__ == '__main__':
         sys.exit("n must be >= 1")
 
     # Import vocabulary list
-    chars = import_from_tsv(args.filename)
-    percent = display_progress(chars, args.n, args.invert)
+    vocab = Skritter(args.filename)
+    percent = display_progress(vocab.chars, args.n, args.invert)
     print("Known: {:0.2f}".format(percent))

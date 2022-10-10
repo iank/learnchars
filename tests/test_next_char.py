@@ -1,6 +1,6 @@
 import os
 import pytest
-from learnchars.skritter import import_from_tsv
+from learnchars.skritter import Skritter
 from learnchars.chars import get_next_character
 from learnchars.chars import get_character_rank
 
@@ -18,8 +18,8 @@ def test_nextchar(datafiles):
     This tests the retrieval of the next most common unknown character
     """
     assert (datafiles / 'test_nextchar.tsv').check(file=1)
-    chars = import_from_tsv((datafiles / 'test_nextchar.tsv').realpath())
-    next_char = get_next_character(chars)
+    s = Skritter(datafiles / 'test_nextchar.tsv')
+    next_char = get_next_character(s.chars)
 
     assert next_char == [('人', 7)]
 
@@ -32,8 +32,8 @@ def test_nextchar_n(datafiles):
     This tests the retrieval of the next N most common characters
     """
     assert (datafiles / 'test_nextchar.tsv').check(file=1)
-    chars = import_from_tsv((datafiles / 'test_nextchar.tsv').realpath())
-    next_char = get_next_character(chars, n=2)
+    s = Skritter(datafiles / 'test_nextchar.tsv')
+    next_char = get_next_character(s.chars, n=2)
 
     assert next_char == [('人', 7), ('我', 9)]
 

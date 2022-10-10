@@ -10,7 +10,7 @@ import sys
 import argparse
 import math
 from pathlib import Path
-from learnchars.skritter import import_from_tsv
+from learnchars.skritter import Skritter
 from learnchars.textfile import analyze_frequency
 from learnchars.textfile import count_characters
 from learnchars.chars import get_character_rank
@@ -32,7 +32,7 @@ if __name__ == '__main__':
         sys.exit("Path to vocabulary list does not exist or is not a file")
 
     # Import vocabulary list
-    known_chars = import_from_tsv(args.filename)
+    vocab = Skritter(args.filename)
 
     # Analyze text file
     textchars = analyze_frequency(args.textfile)
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     if not args.percent:
         print("character: count_in_this_text (Jun Da's rank)")
         for char, count in textchars.items():
-            if char in known_chars:
+            if char in vocab.chars:
                 if args.known:
                     print("#{}: {} ({})".format(char, count, get_character_rank(char)))
             else:
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
         known_count = 0
         for char, count in textchars.items():
-            if char in known_chars:
+            if char in vocab.chars:
                 known_count = known_count + count
 
         print("You currently know {}/{} ({:0.2f}%)".format(
@@ -81,7 +81,7 @@ if __name__ == '__main__':
         for char, count in textchars.items():
             if must_know <= 0:
                 break
-            if char in known_chars:
+            if char in vocab.chars:
                 continue
             print(" {}: {} ({})".format(char, count, get_character_rank(char)))
             must_know = must_know - count

@@ -8,7 +8,7 @@ import sys
 import argparse
 import wordfreq
 from pathlib import Path
-from learnchars.skritter import import_from_tsv
+from learnchars.skritter import Skritter
 from learnchars.chars import get_next_character
 
 
@@ -43,14 +43,14 @@ if __name__ == '__main__':
         sys.exit("words must be >= 0")
 
     # Import vocabulary list
-    chars = import_from_tsv(args.filename)
+    vocab = Skritter(args.filename)
 
     if len(args.char) > 0:
         print("Words containing {}:".format(args.char))
         find_words_for_char(args.char)
     else:
         # Find [n] unknown characters and [words] new words per character
-        next_chars = get_next_character(chars, args.n)
+        next_chars = get_next_character(vocab.chars, args.n)
         for (next_char, rank) in next_chars:
             print("Next unknown character: {} (rank: {})".format(next_char, rank))
             find_words_for_char(next_char)

@@ -1,8 +1,13 @@
 import re
 
 
-def import_from_tsv(filename):
-    words = words_from_tsv(filename)
+class Skritter:
+    def __init__(self, filename):
+        self.words = _words_from_tsv(filename)
+        self.chars = _chars_from_words(self.words)
+
+
+def _chars_from_words(words):
     chars = []
     for word in words:
         chars.extend([*word])
@@ -10,10 +15,11 @@ def import_from_tsv(filename):
     return set(chars)
 
 
-def words_from_tsv(filename):
+def _words_from_tsv(filename):
     lines = []
     with open(filename) as f:
         lines = f.readlines()
 
     valid_lines = [line for line in lines if re.match(".*\t.*\t.*\t", line)]
-    return [line.split("\t")[0] for line in valid_lines]
+    words = [line.split("\t")[0] for line in valid_lines]
+    return set(words)
