@@ -157,10 +157,12 @@ Summarize the 2500 most frequently-used characters- roughly 99.9% of characters 
     ｜　　　　　　　　　　　　　　　　　　　　　　　　　　　苹　　　　　　　　　　　　　　　　　　　　　　｜
     一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一
 
-# License
-
-MIT License.
+# License/attribution
 
 Please see [wordfreq](https://github.com/rspeer/wordfreq) for information about licensing and attribution for the data sources distributed with that module.
 
 Character frequency data from https://lingua.mtsu.edu/chinese-computing/statistics/char/list.php?Which=MO
+
+There is an HSK word list from [Cédric Hartland](http://cedric.hartland.free.fr/) distributed with this module. It has a CC BY-NC license.
+
+Use the MIT license for the rest.
