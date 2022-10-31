@@ -10,19 +10,31 @@ import wordfreq
 from pathlib import Path
 from learnchars.skritter import Skritter
 from learnchars.chars import get_next_character
+from learnchars.hsk import HSK
 
 
 def find_words_for_char(next_char):
-    found_words = 0
+    hsk = HSK()
+
+    # Find first N words containing this character:
+    found_words = []
     for word in wordfreq.iter_wordlist('zh'):
         if next_char in word:
-            found_words = found_words + 1
-            print("#{}:\t{}\t({})".format(
-                found_words, word, wordfreq.word_frequency(word, "zh"))
-            )
+            found_words.append(word)
 
-        if found_words == args.words:
+        if len(found_words) == args.words:
             break
+
+    # Print the words, their frequency, and HSK level (if applicable)
+    for idx, word in enumerate(found_words):
+        frequency = wordfreq.word_frequency(word, "zh")
+        hsk_level = hsk.hsk_level(word)
+        if hsk_level is not None:
+            hsk_str = "HSK {}".format(hsk_level)
+        else:
+            hsk_str = ""
+
+        print("{:<8}\t{:<8}\t{:<10}\t{}".format(idx, word, frequency, hsk_str))
 
 
 if __name__ == '__main__':
