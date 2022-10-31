@@ -15,6 +15,54 @@ from learnchars.textfile import analyze_frequency
 from learnchars.textfile import count_characters
 from learnchars.chars import get_character_rank
 
+
+def print_unknown_words(textchars, vocab):
+    """Print unknown characters in a given text"""
+    print("character: count_in_this_text (Jun Da's rank)")
+    for char, count in textchars.items():
+        if char not in vocab.chars:
+            print(" {}: {}".format(char, count))
+
+
+def print_needed_words(textfile, percent, textchars, vocab):
+    """Print a list of characters that would be needed to reach target coverage"""
+    if percent < 0 or percent > 1:
+        sys.exit("percent should be between 0-1 (inclusive)")
+
+    charcount = count_characters(textfile)
+    must_know = math.ceil(charcount * percent)
+
+    print("Input file contains {} total characters".format(charcount))
+    print("For {:0.2f}% comprehension, you must know {}".format(
+        percent * 100, must_know)
+    )
+
+    known_count = 0
+    for char, count in textchars.items():
+        if char in vocab.chars:
+            known_count = known_count + count
+
+    print("You currently know {}/{} ({:0.2f}%)".format(
+        known_count, charcount, known_count / charcount * 100
+    ))
+
+    if known_count > must_know:
+        sys.exit()
+
+    must_know = must_know - known_count
+    print("Characters to learn to reach {:0.2f}% character coverage".format(
+        percent * 100
+    ))
+    print("character: count_in_this_text (Jun Da's rank)")
+    for char, count in textchars.items():
+        if must_know <= 0:
+            break
+        if char in vocab.chars:
+            continue
+        print(" {}: {} ({})".format(char, count, get_character_rank(char)))
+        must_know = must_know - count
+
+
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description='Analyze text by characters')
     p.add_argument('filename', type=Path, metavar='filename.tsv', help='path to Skritter tsv')
@@ -37,46 +85,9 @@ if __name__ == '__main__':
 
     # If we just want a list of known/unknown characters in the text
     if not args.percent:
-        print("character: count_in_this_text (Jun Da's rank)")
-        for char, count in textchars.items():
-            if char not in vocab.chars:
-                print(" {}: {}".format(char, count))
+        print_unknown_words(textchars, vocab)
 
     # Otherwise, show the characters that would be needed to learn in order to
     # reach args.percent% *character* coverage of the given text.
     else:
-        if args.percent < 0 or args.percent > 1:
-            sys.exit("percent should be between 0-1 (inclusive)")
-
-        charcount = count_characters(args.textfile)
-        must_know = math.ceil(charcount * args.percent)
-
-        print("Input file contains {} total characters".format(charcount))
-        print("For {:0.2f}% comprehension, you must know {}".format(
-            args.percent * 100, must_know)
-        )
-
-        known_count = 0
-        for char, count in textchars.items():
-            if char in vocab.chars:
-                known_count = known_count + count
-
-        print("You currently know {}/{} ({:0.2f}%)".format(
-            known_count, charcount, known_count / charcount * 100
-        ))
-
-        if known_count > must_know:
-            sys.exit()
-
-        must_know = must_know - known_count
-        print("Characters to learn to reach {:0.2f}% character coverage".format(
-            args.percent * 100
-        ))
-        print("character: count_in_this_text (Jun Da's rank)")
-        for char, count in textchars.items():
-            if must_know <= 0:
-                break
-            if char in vocab.chars:
-                continue
-            print(" {}: {} ({})".format(char, count, get_character_rank(char)))
-            must_know = must_know - count
+        print_needed_words(args.textfile, args.percent, textchars, vocab)
