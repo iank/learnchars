@@ -62,7 +62,7 @@ if __name__ == '__main__':
                 known_count = known_count + count
 
         print("You currently know {}/{} ({:0.2f}%)".format(
-            known_count, must_know, known_count / charcount * 100
+            known_count, charcount, known_count / charcount * 100
         ))
 
         if known_count > must_know:
