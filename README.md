@@ -4,9 +4,9 @@ This is a tool to help me pick Chinese vocabulary words to learn
 
 # Building
 
+    poetry install
     poetry run pytest
     poetry run flake8
-    poetry install
 
 # Usage
 
