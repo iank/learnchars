@@ -6,7 +6,7 @@ import sys
 import argparse
 from pathlib import Path
 from learnchars.skritter import Skritter
-from learnchars.chars import display_progress
+from learnchars.chars import str_progress
 
 
 if __name__ == '__main__':
@@ -24,5 +24,6 @@ if __name__ == '__main__':
 
     # Import vocabulary list
     vocab = Skritter(args.filename)
-    percent = display_progress(vocab.chars, args.n, args.invert)
+    (percent, progress) = str_progress(vocab.chars, args.n, args.invert)
+    print(progress)
     print("Known: {:0.2f}".format(percent))

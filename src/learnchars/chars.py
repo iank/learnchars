@@ -38,9 +38,9 @@ def get_next_character(known_characters, n=1):
     return found
 
 
-def display_progress(known_characters, n=1000, invert=False):
+def str_progress(known_characters, n=1000, invert=False, line_width=50):
+    progress = ""
     known_count = 0
-    LINE_WIDTH = 50
 
     if n < 1:
         raise ValueError("n must be >= 1")
@@ -52,30 +52,30 @@ def display_progress(known_characters, n=1000, invert=False):
         known_format = '\u3000'
         unknown_format = '{}'
 
-    print('一' * (LINE_WIDTH + 2))
+    progress += '一' * (line_width + 2) + "\n"
     remaining = n
     pos = 0
     for (char, _) in character_list():
         if pos == 0:
-            print('｜', end='')
+            progress += '｜'
 
         if char in known_characters:
-            print(known_format.format(char), end='')
+            progress += known_format.format(char)
             known_count = known_count + 1
         else:
-            print(unknown_format.format(char), end='')
+            progress += unknown_format.format(char)
 
         pos = pos + 1
-        if pos == LINE_WIDTH:
-            print('｜')
+        if pos == line_width:
+            progress += "｜\n"
             pos = 0
 
         remaining = remaining - 1
         if remaining == 0:
             break
 
-    print('一' * (LINE_WIDTH + 2))
-    return known_count / n
+    progress += '一' * (line_width + 2)
+    return (known_count / n, progress)
 
 
 def get_character_rank(character):
