@@ -38,13 +38,14 @@ def get_next_character(known_characters, n=1):
     return found
 
 
-def str_progress(known_characters, n=1000, invert=False, line_width=50):
+def str_progress(known_characters, n=1000, invert=False, line_width=50, border=True):
     progress = ""
     known_count = 0
 
     if n < 1:
         raise ValueError("n must be >= 1")
 
+    # Configure known/unknown printing formats
     if not invert:
         known_format = '{}'
         unknown_format = '\u3000'
@@ -52,12 +53,27 @@ def str_progress(known_characters, n=1000, invert=False, line_width=50):
         known_format = '\u3000'
         unknown_format = '{}'
 
-    progress += '一' * (line_width + 2) + "\n"
-    remaining = n
+    # Configure border
+    if border:
+        border_horiz = '一' * (line_width + 2)
+        border_vert = '｜'
+        border_top = border_horiz + "\n"
+    else:
+        border_horiz = ''
+        border_vert = ''
+        border_top = border_horiz
+
+    border_bottom = border_horiz
+    border_left = border_vert
+    border_right = border_vert + "\n"
+
+    # Construct progress string
+    progress += border_top
+
     pos = 0
-    for (char, _) in character_list():
+    for (char, _) in character_list()[:n]:
         if pos == 0:
-            progress += '｜'
+            progress += border_left
 
         if char in known_characters:
             progress += known_format.format(char)
@@ -67,14 +83,10 @@ def str_progress(known_characters, n=1000, invert=False, line_width=50):
 
         pos = pos + 1
         if pos == line_width:
-            progress += "｜\n"
+            progress += border_right
             pos = 0
 
-        remaining = remaining - 1
-        if remaining == 0:
-            break
-
-    progress += '一' * (line_width + 2)
+    progress += border_bottom
     return (known_count / n, progress)
 
 
