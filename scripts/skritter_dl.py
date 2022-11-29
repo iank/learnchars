@@ -2,11 +2,9 @@
 """
 Fetch vocab list from skritter
 """
-import sys
 import argparse
 import requests
 
-import pprint
 
 def skritter_api_fetch_entities(token, cursor=None):
     url = 'https://api.skritter.com/v3/items'
@@ -22,11 +20,12 @@ def skritter_api_fetch_entities(token, cursor=None):
         "Authorization": "bearer {}".format(token),
         "Origin": "https://skritter.com",
     }
-    
+
     resp = requests.get(url, headers=headers, params=params)
     resp.raise_for_status()
 
     return resp.json()
+
 
 def skritter_api_fetch_by_ids(token, ids):
     url = 'https://api.skritter.com/v3/vocabs/fetch-by-ids'
@@ -38,7 +37,7 @@ def skritter_api_fetch_by_ids(token, ids):
         "Authorization": "bearer {}".format(token),
         "Origin": "https://skritter.com",
     }
-    
+
     resp = requests.post(url, headers=headers, data=params)
     resp.raise_for_status()
 
@@ -57,7 +56,7 @@ if __name__ == '__main__':
         ret = skritter_api_fetch_entities(args.token, cursor)
         cursor = ret['cursor']
 
-        vids = [entity['vocabIds'][0] for entity in ret['entities'] if len(entity['vocabIds']) == 1]
+        vids = [x['vocabIds'][0] for x in ret['entities'] if len(x['vocabIds']) == 1]
         vocabids = vocabids.union(vids)
 
         if cursor is None:
@@ -66,7 +65,7 @@ if __name__ == '__main__':
     # Split into groups of 300, fetch-by-ids
     vocabids = list(vocabids)
     N = 300
-    idgroups = [vocabids[i:i+N] for i in range(0, len(vocabids), N)]
+    idgroups = [vocabids[i:i + N] for i in range(0, len(vocabids), N)]
 
     vocab = []
     for group in idgroups:
