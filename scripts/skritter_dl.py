@@ -8,8 +8,6 @@ import requests
 
 import pprint
 
-from IPython import embed
-
 def skritter_api_fetch_entities(token, cursor=None):
     url = 'https://api.skritter.com/v3/items'
     params = {
