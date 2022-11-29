@@ -16,6 +16,7 @@ This is a tool to help me pick Chinese vocabulary words to learn
     progress.py [-h] [-i] filename.tsv [n]
     easy_words.py [-h] filename.tsv
     skritter_dl.py [-h] token
+    kindle_img.py [-h] [-i] filename.tsv
 
 # Motivation
 
@@ -33,9 +34,12 @@ Optionally, ``analyze_text.py`` can limit its display to the most frequent chara
 
 ``progress.py`` is a visual indication of progress. It's just for fun. See examples below.
 
+``kindle_img.py`` is for formatting progress images (as in ``progress.py``) to replace the screensaver on a jailbroken KT2 Kindle.
+
 ``easy_words.py`` finds words composed of characters I already know, optionally by HSK level.
 
 ``skritter_dl.py`` uses the Skritter API to download the vocabulary list.
+
 
 # Examples
 
