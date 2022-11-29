@@ -12,6 +12,7 @@ wordfreq = {extras = ["cjk"], version = "^3.0.2"}
 zhon = "^1.1.5"
 cedict-utils = "^0.0.13"
 pillow = "^9.3.0"
+colorama = "^0.4.6"
 
 
 [tool.poetry.group.dev.dependencies]

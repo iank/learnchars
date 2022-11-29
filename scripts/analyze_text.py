@@ -14,9 +14,10 @@ from learnchars.skritter import Skritter
 from learnchars.textfile import analyze_frequency
 from learnchars.textfile import count_characters
 from learnchars.chars import get_character_rank
+from learnchars.chars import str_progress
 
 
-def print_unknown_words(textchars, vocab):
+def print_unknown_chars(textchars, vocab):
     """Print unknown characters in a given text"""
     print("character: count_in_this_text (Jun Da's rank)")
     for char, count in textchars.items():
@@ -24,8 +25,9 @@ def print_unknown_words(textchars, vocab):
             print(" {}: {}".format(char, count))
 
 
-def print_needed_words(textfile, percent, textchars, vocab):
+def print_needed_chars(textfile, percent, textchars, vocab):
     """Print a list of characters that would be needed to reach target coverage"""
+    ret_list = []
     if percent < 0 or percent > 1:
         sys.exit("percent should be between 0-1 (inclusive)")
 
@@ -60,7 +62,10 @@ def print_needed_words(textfile, percent, textchars, vocab):
         if char in vocab.chars:
             continue
         print(" {}: {} ({})".format(char, count, get_character_rank(char)))
+        ret_list.append(char)
         must_know = must_know - count
+
+    return ret_list
 
 
 if __name__ == '__main__':
@@ -70,6 +75,8 @@ if __name__ == '__main__':
 
     p.add_argument('-p', '--percent', type=float,
                    help='print characters needed to learn to reach X%% character coverage')
+    p.add_argument('-H', '--highlight', action='store_true',
+                   help='print progress display with unknown characters in text highlighted')
     args = p.parse_args()
 
     if not args.filename.is_file():
@@ -85,9 +92,12 @@ if __name__ == '__main__':
 
     # If we just want a list of known/unknown characters in the text
     if not args.percent:
-        print_unknown_words(textchars, vocab)
+        print_unknown_chars(textchars, vocab)
 
     # Otherwise, show the characters that would be needed to learn in order to
     # reach args.percent% *character* coverage of the given text.
     else:
-        print_needed_words(args.textfile, args.percent, textchars, vocab)
+        highlight_chars = print_needed_chars(args.textfile, args.percent, textchars, vocab)
+        if args.highlight:
+            (_, progress) = str_progress(vocab.chars, 2000, True, highlight=highlight_chars)
+            print(progress)
