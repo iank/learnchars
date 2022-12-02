@@ -193,10 +193,13 @@ Update vocabulary list from Skritter.
 
 Included is a Dockerfile that builds an image with the package installed in a virtual environment.
 
-TODO docker-compose.yml
-- provision skritter credentials
-- ofelia update vocab list + regenerate images
-- serve images
+TODO
+- script in docker: update vocab list + regenerate images
+- docker-compose [ofelia](https://viktorsapozhok.github.io/docker-python-ofelia/)
+- docker-compose provision skritter credentials
+- docker-compose serve images
+
+Warning: Docker image shouldn't ever need the Skritter PW, but currently it does. A better thing to do would be make use of oauth and authenticate once manually, then have the docker image refresh the token.
 
 ```
 docker build -t learnchars .
