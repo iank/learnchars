@@ -27,3 +27,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 skritter_dl = "learnchars.skritter:main"
+kindle_img = "learnchars.kindle:main"

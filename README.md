@@ -15,7 +15,7 @@ This is a tool to help me pick Chinese vocabulary words to learn
     analyze_text.py [-h] [-p PERCENT] filename.tsv textfile.txt
     progress.py [-h] [-i] filename.tsv [n]
     easy_words.py [-h] filename.tsv
-    kindle_img.py [-h] [-i] filename.tsv
+    kindle_img [-h] [-i] filename.tsv
     skritter_dl [-h] token
 
 # Motivation
@@ -34,7 +34,7 @@ Optionally, ``analyze_text.py`` can limit its display to the most frequent chara
 
 ``progress.py`` is a visual indication of progress. It's just for fun. See examples below.
 
-``kindle_img.py`` is for formatting progress images (as in ``progress.py``) to replace the screensaver on a jailbroken KT2 Kindle.
+``kindle_img`` is for formatting progress images (as in ``progress.py``) to replace the screensaver on a jailbroken KT2 Kindle.
 
 ``easy_words.py`` finds words composed of characters I already know, optionally by HSK level.
 
@@ -191,7 +191,12 @@ Update vocabulary list from Skritter.
 
 # Docker
 
-Included is a Dockerfile and a docker-compose.yml that TODO
+Included is a Dockerfile that builds an image with the package installed in a virtual environment.
+
+TODO docker-compose.yml
+- provision skritter credentials
+- ofelia update vocab list + regenerate images
+- serve images
 
 ```
 docker build -t learnchars .
