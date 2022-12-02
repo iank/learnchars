@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "learnchars"
-version = "0.1.0"
+version = "0.1"
 description = "A tool to help me pick vocabulary words to learn"
 authors = ["Ian Kilgore <iank@iank.org>"]
 license = "MIT"
@@ -23,3 +23,6 @@ pytest-datafiles = "^2.0.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+skritter_dl = "learnchars.skritter:main"

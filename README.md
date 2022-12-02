@@ -15,8 +15,8 @@ This is a tool to help me pick Chinese vocabulary words to learn
     analyze_text.py [-h] [-p PERCENT] filename.tsv textfile.txt
     progress.py [-h] [-i] filename.tsv [n]
     easy_words.py [-h] filename.tsv
-    skritter_dl.py [-h] token
     kindle_img.py [-h] [-i] filename.tsv
+    skritter_dl [-h] token
 
 # Motivation
 
@@ -38,7 +38,7 @@ Optionally, ``analyze_text.py`` can limit its display to the most frequent chara
 
 ``easy_words.py`` finds words composed of characters I already know, optionally by HSK level.
 
-``skritter_dl.py`` uses the Skritter API to download the vocabulary list.
+``skritter_dl`` uses the Skritter API to download the vocabulary list.
 
 
 # Examples
@@ -187,7 +187,18 @@ Find 10 words in HSK 6 that are composed of characters I already know.
 
 Update vocabulary list from Skritter.
 
-    ./scripts/skritter_dl.py example_username example_password > ../skritter.tsv
+    skritter_dl example_username example_password > ../skritter.tsv
+
+# Docker
+
+Included is a Dockerfile and a docker-compose.yml that TODO
+
+```
+docker build -t learnchars .
+docker run -ti learnchars /bin/bash
+
+# source /venv/bin/activate
+```
 
 # License/attribution
 
