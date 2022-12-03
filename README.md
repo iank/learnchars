@@ -15,8 +15,8 @@ This is a tool to help me pick Chinese vocabulary words to learn
     analyze_text.py [-h] [-p PERCENT] filename.tsv textfile.txt
     progress.py [-h] [-i] filename.tsv [n]
     easy_words.py [-h] filename.tsv
-    skritter_dl.py [-h] token
-    kindle_img.py [-h] [-i] filename.tsv
+    kindle_img [-h] [-i] filename.tsv
+    skritter_dl [-h] token
 
 # Motivation
 
@@ -34,11 +34,11 @@ Optionally, ``analyze_text.py`` can limit its display to the most frequent chara
 
 ``progress.py`` is a visual indication of progress. It's just for fun. See examples below.
 
-``kindle_img.py`` is for formatting progress images (as in ``progress.py``) to replace the screensaver on a jailbroken KT2 Kindle.
+``kindle_img`` is for formatting progress images (as in ``progress.py``) to replace the screensaver on a jailbroken KT2 Kindle.
 
 ``easy_words.py`` finds words composed of characters I already know, optionally by HSK level.
 
-``skritter_dl.py`` uses the Skritter API to download the vocabulary list.
+``skritter_dl`` uses the Skritter API to download the vocabulary list.
 
 
 # Examples
@@ -187,7 +187,23 @@ Find 10 words in HSK 6 that are composed of characters I already know.
 
 Update vocabulary list from Skritter.
 
-    ./scripts/skritter_dl.py example_username example_password > ../skritter.tsv
+    skritter_dl example_username example_password > ../skritter.tsv
+
+# Docker
+
+Included is a Dockerfile that builds an image with the package installed in a virtual environment.
+
+TODO
+- script in docker: update vocab list + regenerate images
+- docker-compose [ofelia](https://viktorsapozhok.github.io/docker-python-ofelia/)
+- docker-compose provision skritter credentials
+- docker-compose serve images
+
+Warning: Docker image shouldn't ever need the Skritter PW, but currently it does. A better thing to do would be make use of oauth and authenticate once manually, then have the docker image refresh the token.
+
+```
+SKRITTER_USERNAME=example SKRITTER_PW=example docker-compose up
+```
 
 # License/attribution
 

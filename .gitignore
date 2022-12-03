@@ -164,4 +164,3 @@ cython_debug/
 
 # Following are files I often keep in this directory and do not want to commit
 skritter.tsv
-simsun.ttc
