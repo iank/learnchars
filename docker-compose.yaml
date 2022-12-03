@@ -1,0 +1,34 @@
+version: '3.7'
+
+volumes:
+  web_data:
+
+services:
+  learnchars:
+    image: iank1/learnchars:latest
+    restart: unless-stopped
+    environment:
+      - "SKRITTER_USERNAME=${SKRITTER_USERNAME}"
+      - "SKRITTER_PW=${SKRITTER_PW}"
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.app.schedule: "@every 24h"
+      ofelia.job-exec.app.command: "/app/docker-kindle-img.sh"
+    volumes:
+      - web_data:/data:rw
+
+  ofelia:
+    image: mcuadros/ofelia:latest
+    restart: unless-stopped
+    depends_on:
+      - learnchars
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 7999:80
+    volumes:
+      - web_data:/usr/share/nginx/html:rw

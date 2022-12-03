@@ -100,4 +100,4 @@ def get_character_rank(character):
         if char == character:
             return rank
 
-    return None
+    return float('inf')

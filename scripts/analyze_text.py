@@ -22,7 +22,7 @@ def print_unknown_chars(textchars, vocab):
     print("character: count_in_this_text (Jun Da's rank)")
     for char, count in textchars.items():
         if char not in vocab.chars:
-            print(" {}: {}".format(char, count))
+            print(" {}: {} ({})".format(char, count, get_character_rank(char)))
 
 
 def print_needed_chars(textfile, percent, textchars, vocab):
