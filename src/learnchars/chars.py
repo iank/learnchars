@@ -39,7 +39,9 @@ def get_next_character(known_characters, n=1):
     return found
 
 
-def str_progress(known_characters, n=1000, invert=False, line_width=50, border=True, highlight=None):
+def str_progress(
+        known_characters, n=1000, invert=False, line_width=50,
+        border=True, highlight=None):
     if highlight is None:
         highlight = []
     progress = ""

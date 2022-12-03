@@ -121,7 +121,8 @@ if __name__ == '__main__':
         # reach args.percent% *character* coverage of the given text.
         highlight_chars = print_needed_chars(textfile, args.percent, vocab)
         if args.highlight:
-            (_, progress) = str_progress(vocab.chars, args.highlight, True, highlight=highlight_chars)
+            (_, progress) = str_progress(vocab.chars, n=args.highlight, invert=True,
+                                         highlight=highlight_chars)
             print(progress)
 
     else:
