@@ -7,6 +7,7 @@ This is a tool to help me pick Chinese vocabulary words to learn
     poetry install
     poetry run pytest
     poetry run flake8
+    poetry run coverage run -m pytest && poetry run coverage report -m
 
 # Usage
 
