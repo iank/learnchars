@@ -201,6 +201,25 @@ SKRITTER_USERNAME=example SKRITTER_PW=example docker compose up -d
 
 Warning: The docker image shouldn't ever need the Skritter PW, but currently it does. A better thing to do would be to make use of oauth and authenticate once manually, then have the docker image refresh the token.
 
+## Kindle configuration
+
+/etc/crontab/root:
+
+```
+44 * * * * /var/tmp/root/update_screensaver.sh
+```
+
+update_screensaver.sh:
+```
+#!/bin/bash
+mntroot rw
+curl http://example.com:7999/bg_ss01.png -o /usr/share/blanket/screensaver/bg_ss01.png
+curl http://example.com:7999/bg_ss00.png -o /usr/share/blanket/screensaver/bg_ss00.png
+mntroot ro
+```
+
+Note that (at least on this Kindle) cron is busybox cron. To reload the crontab, touch /etc/crontab/cron.update. This will update the directory's modification time and the cron.update file will be deleted.
+
 # License/attribution
 
 Please see [wordfreq](https://github.com/rspeer/wordfreq) for information about licensing and attribution for the data sources distributed with that module.
