@@ -7,12 +7,13 @@ This is a tool to help me pick Chinese vocabulary words to learn
     poetry install
     poetry run pytest
     poetry run flake8
+    poetry run coverage run -m pytest && poetry run coverage report -m
 
 # Usage
 
     get_vocab.py [-h] [-w WORDS] [-c CHAR] filename.tsv [n]
     get_sentences.py [-h] [-c CHARS] filename.tsv sentences.tsv
-    analyze_text.py [-h] [-p PERCENT] filename.tsv textfile.txt
+    analyze_text.py [-h] [-p PERCENT] [-H [HIGHLIGHT]] [-s SORT] filename.tsv textfile.txt
     progress.py [-h] [-i] filename.tsv [n]
     easy_words.py [-h] filename.tsv
     kindle_img [-h] [-i] filename.tsv
@@ -31,6 +32,8 @@ When I learn a word I like to add a sentence containing that word to an Anki dec
 ``analyze_text.py`` is for selecting characters to learn based on a text I'd like to read. It displays characters in order of frequency in that text. I find it helpful to make a copy of the text and globally replace names with some placeholder, like 【名字】. This helps get past the names, which tend to be the most frequent unknown characters in any given text and are usually not characters I'm prioritizing at the moment.
 
 Optionally, ``analyze_text.py`` can limit its display to the most frequent characters that would be needed to reach a given percent character coverage; e.g., display only the characters that would be needed to learn to know 98% of the characters in an average sentence/page/chapter of that text. There's a long tail in any given actual text and characters with one or two occurrences can be looked up once and forgotten, for now. So I don't wait until 100% coverage before reading.
+
+Finally, ``analyze_text.py`` can display characters in order of Jun Da's frequency rank rather than frequency in the text. This option also omits characters which only occur once in the text. The idea here is to learn characters that are more generally useful, while also targeting a particular book as a background goal.
 
 ``progress.py`` is a visual indication of progress. It's just for fun. See examples below.
 
@@ -83,31 +86,62 @@ Get a list of sentences comprised entirely of charactres I know, plus a new char
 
 List the unknown characters in a text file, sorted by frequency:
 
-    (zhongwen) ~/learnchars$ ./scripts/analyze_text.py ~/skritter-export-all-2022-10-04_09_50.tsv 活着.txt |head
-    character: count
-     霞: 463
-     凤: 462
-     庆: 329
-     爹: 206
-     队: 194
-     娘: 189
-     村: 167
-     口: 156
-     跑: 153
+    (zhongwen) ~/learnchars$ $ ./scripts/analyze_text.py skritter.tsv 秃秃大王.txt |head
+    character: count_in_this_text (Jun Da's rank)
+     姊: 78 (2236)
+     巴: 72 (546)
+     扑: 71 (1509)
+     唧: 70 (3757)
+     骗: 58 (1503)
+     捉: 58 (1822)
+     娘: 55 (881)
+     哇: 53 (2433)
+     忽: 48 (912)
 
 ## Analyze text: coverage %
 
 List the characters that would be required to reach X% "character coverage" for a given text:
 
-    (zhongwen) ~/learnchars$ ./scripts/analyze_text.py ~/skritter-export-all-2022-10-04_09_50.tsv 秃秃大王.txt -p .88
-    Input file contains 33738 total characters
-    For 88.00% comprehension, you must know 29690
-    You currently know 29399/29690 (87.14%)
-    Characters to learn to reach 88.00% character coverage
-     汪: 86
-     代: 80
-     扑: 74
-     巴: 70
+    (zhongwen) ~/learnchars$ ./scripts/analyze_text.py skritter.tsv 秃秃大王.txt -p .92
+    Input file contains 34363 total characters
+    For 92.00% comprehension, you must know 31614
+    You currently know 31170/34363 (90.71%)
+    Characters to learn to reach 92.00% character coverage
+    character: count_in_this_text (Jun Da's rank)
+     姊: 78 (2236)
+     巴: 72 (546)
+     扑: 71 (1509)
+     唧: 70 (3757)
+     骗: 58 (1503)
+     捉: 58 (1822)
+     娘: 55 (881)
+
+## Analyze text: general
+
+List the unknown characters in a text file, sorted by Jun Da's frequency rank. Include the top 500 characters (Jun Da's rank). Omit characters that only occur once in the text file.
+
+    (zhongwen) ~/learnchars$ ./scripts/analyze_text.py skritter.tsv 秃秃大王.txt -s 500
+    character: count_in_this_text (Jun Da's rank)
+     立: 4 (197)
+     处: 8 (206)
+     各: 5 (209)
+     反: 13 (237)
+     社: 3 (270)
+     强: 4 (292)
+     规: 2 (321)
+     万: 33 (322)
+     术: 2 (328)
+     领: 3 (329)
+     步: 15 (349)
+     造: 4 (354)
+     团: 2 (405)
+     究: 13 (429)
+     线: 3 (430)
+     断: 4 (434)
+     支: 5 (437)
+     研: 3 (447)
+     念: 2 (477)
+     随: 2 (498)
 
 ## Display progress
 
