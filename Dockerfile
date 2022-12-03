@@ -25,4 +25,5 @@ RUN poetry build && /venv/bin/pip install dist/*.whl
 FROM base as final
 
 COPY --from=builder /venv /venv
+COPY scripts/docker-kindle-img.sh /app/
 CMD tail -f /dev/null

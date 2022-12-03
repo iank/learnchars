@@ -202,10 +202,7 @@ TODO
 Warning: Docker image shouldn't ever need the Skritter PW, but currently it does. A better thing to do would be make use of oauth and authenticate once manually, then have the docker image refresh the token.
 
 ```
-docker build -t learnchars .
-docker run -ti learnchars /bin/bash
-
-# source /venv/bin/activate
+SKRITTER_USERNAME=example SKRITTER_PW=example docker-compose up
 ```
 
 # License/attribution
