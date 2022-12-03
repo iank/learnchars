@@ -1,3 +1,0 @@
-- refactor scripts/analyze_text functions into analysis module + script printer
-- str_progress highlighting dim/normal/bright based on frequency in the text
-- update README entries/examples for analyze_text/progress.py
