@@ -1,6 +1,6 @@
 from pkg_resources import resource_filename
 from functools import lru_cache
-from colorama import Fore,Style
+from colorama import Fore, Style
 
 CHAR_FREQ_FILENAME = resource_filename("learnchars", "data/junda.tsv")
 
@@ -39,7 +39,9 @@ def get_next_character(known_characters, n=1):
     return found
 
 
-def str_progress(known_characters, n=1000, invert=False, line_width=50, border=True, highlight=[]):
+def str_progress(known_characters, n=1000, invert=False, line_width=50, border=True, highlight=None):
+    if highlight is None:
+        highlight = []
     progress = ""
     known_count = 0
 
