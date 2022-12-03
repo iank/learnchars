@@ -43,3 +43,4 @@ def test_char_rank():
     This tests looking up a character's frequency
     """
     assert get_character_rank('条') == 214
+    assert get_character_rank('捲') == float('inf')
