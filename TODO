@@ -3,7 +3,7 @@ refactor scripts/analyze_text functions into analysis module + script printer
 
 clean up analyze_text:
 	option combinations
-	hardcoded N value
+	hardcoded N value -> argparse default
 	output format
 
 pytest coverage

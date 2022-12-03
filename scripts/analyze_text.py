@@ -9,6 +9,7 @@
 import sys
 import argparse
 import math
+import collections
 from pathlib import Path
 from learnchars.skritter import Skritter
 from learnchars.textfile import Textfile
@@ -16,15 +17,14 @@ from learnchars.chars import get_character_rank
 from learnchars.chars import str_progress
 
 
-def print_unknown_chars(textchars, vocab):
+def print_frequency_and_rank(chars):
     """Print unknown characters in a given text"""
     print("character: count_in_this_text (Jun Da's rank)")
-    for char, count in textchars.items():
-        if char not in vocab.chars:
-            print(" {}: {} ({})".format(char, count, get_character_rank(char)))
+    for char, count in chars.items():
+        print(" {}: {} ({})".format(char, count, get_character_rank(char)))
 
 
-def print_needed_chars(textfile, percent, textchars, vocab):
+def print_needed_chars(textfile, percent, vocab):
     """Print a list of characters that would be needed to reach target coverage"""
     ret_list = []
     if percent < 0 or percent > 1:
@@ -39,7 +39,7 @@ def print_needed_chars(textfile, percent, textchars, vocab):
     )
 
     known_count = 0
-    for char, count in textchars.items():
+    for char, count in textfile.analyze_frequency().items():
         if char in vocab.chars:
             known_count = known_count + count
 
@@ -55,7 +55,7 @@ def print_needed_chars(textfile, percent, textchars, vocab):
         percent * 100
     ))
     print("character: count_in_this_text (Jun Da's rank)")
-    for char, count in textchars.items():
+    for char, count in textfile.analyze_frequency().items():
         if must_know <= 0:
             break
         if char in vocab.chars:
@@ -67,13 +67,21 @@ def print_needed_chars(textfile, percent, textchars, vocab):
     return ret_list
 
 
-def print_sorted_chars(textchars, vocab, threshold):
-    textchars = {k: v for (k, v) in textchars.items() if k not in vocab.chars}
+def sorted_threshold_chars(textchars, threshold):
+    # tcs maps Jun Da's Rank -> character, with 1-occurrence characters removed
     tcs = {get_character_rank(k): k for (k, v) in textchars.items() if v != 1}
-    print("character: count_in_this_text (Jun Da's rank)")
-    for key in sorted(tcs):
-        if key <= args.sort:
-            print(" {}: {} ({})".format(tcs[key], textchars[tcs[key]], key))
+
+    # Remove characters with rank > threshold and sort by Jun Da rank
+    sorted_chars = collections.OrderedDict()
+    for rank in sorted(tcs):
+        if rank > threshold:
+            break
+
+        char = tcs[rank]
+        # Map char -> occurrences
+        sorted_chars[char] = textchars[char]
+
+    return sorted_chars
 
 
 if __name__ == '__main__':
@@ -107,20 +115,21 @@ if __name__ == '__main__':
 
     # Analyze text file
     textfile = Textfile(args.textfile)
-    textchars = textfile.analyze_frequency()
 
-    # Show the characters that would be needed to learn in order to
-    # reach args.percent% *character* coverage of the given text.
     if args.percent:
-        highlight_chars = print_needed_chars(textfile, args.percent, textchars, vocab)
+        # Show the characters that would be needed to learn in order to
+        # reach args.percent% *character* coverage of the given text.
+        highlight_chars = print_needed_chars(textfile, args.percent, vocab)
         if args.highlight:
             (_, progress) = str_progress(vocab.chars, 2000, True, highlight=highlight_chars)
             print(progress)
 
-    # If we're supposed to sort by Jun Da's rank and exclude n=1
-    elif args.sort:
-        print_sorted_chars(textchars, vocab, args.sort)
-
-    # Otherwise we just want a list of known/unknown characters in the text
     else:
-        print_unknown_chars(textchars, vocab)
+        # Otherwise get all unknown characters
+        unknown_characters = textfile.unknown_characters(vocab)
+
+        if args.sort:
+            # If we're supposed to sort by Jun Da's rank and exclude n=1
+            unknown_characters = sorted_threshold_chars(unknown_characters, args.sort)
+
+        print_frequency_and_rank(unknown_characters)
