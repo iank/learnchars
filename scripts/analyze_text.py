@@ -91,7 +91,7 @@ if __name__ == '__main__':
 
     p.add_argument('-p', '--percent', type=float,
                    help='print characters needed to learn to reach X%% character coverage')
-    p.add_argument('-H', '--highlight', action='store_true',
+    p.add_argument('-H', '--highlight', type=int, nargs='?', const=2000,
                    help='print progress display with unknown characters in text highlighted')
     p.add_argument('-s', '--sort', type=int,
                    help="Sort by Jun Da's character rank, not rank in text. "
@@ -121,7 +121,7 @@ if __name__ == '__main__':
         # reach args.percent% *character* coverage of the given text.
         highlight_chars = print_needed_chars(textfile, args.percent, vocab)
         if args.highlight:
-            (_, progress) = str_progress(vocab.chars, 2000, True, highlight=highlight_chars)
+            (_, progress) = str_progress(vocab.chars, args.highlight, True, highlight=highlight_chars)
             print(progress)
 
     else:
