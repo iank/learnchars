@@ -63,6 +63,15 @@ def print_needed_words(textfile, percent, textchars, vocab):
         must_know = must_know - count
 
 
+def print_sorted_words(textchars, vocab, threshold):
+    textchars = {k: v for (k, v) in textchars.items() if k not in vocab.chars}
+    tcs = {get_character_rank(k): k for (k, v) in textchars.items() if v != 1}
+    print("character: count_in_this_text (Jun Da's rank)")
+    for key in sorted(tcs):
+        if key <= args.sort:
+            print(" {}: {} ({})".format(tcs[key], textchars[tcs[key]], key))
+
+
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description='Analyze text by characters')
     p.add_argument('filename', type=Path, metavar='filename.tsv', help='path to Skritter tsv')
@@ -70,12 +79,18 @@ if __name__ == '__main__':
 
     p.add_argument('-p', '--percent', type=float,
                    help='print characters needed to learn to reach X%% character coverage')
+    p.add_argument('-s', '--sort', type=int,
+                   help="Sort by Jun Da's character rank, not rank in text. "
+                        + 'Only return characters with Jun Da rank less than or equal to SORT. '
+                        + 'Also exclude characters with 1 occurrence in the text.')
     args = p.parse_args()
 
     if not args.filename.is_file():
         sys.exit("Path to vocabulary list does not exist or is not a file")
     if not args.textfile.is_file():
         sys.exit("Path to vocabulary list does not exist or is not a file")
+    if args.percent and args.sort():
+        sys.exit("Choose one of [-p, -s]")
 
     # Import vocabulary list
     vocab = Skritter(args.filename)
@@ -83,11 +98,15 @@ if __name__ == '__main__':
     # Analyze text file
     textchars = analyze_frequency(args.textfile)
 
-    # If we just want a list of known/unknown characters in the text
-    if not args.percent:
-        print_unknown_words(textchars, vocab)
-
-    # Otherwise, show the characters that would be needed to learn in order to
+    # Show the characters that would be needed to learn in order to
     # reach args.percent% *character* coverage of the given text.
-    else:
+    if args.percent:
         print_needed_words(args.textfile, args.percent, textchars, vocab)
+
+    # If we're supposed to sort by Jun Da's rank and exclude n=1
+    elif args.sort:
+        print_sorted_words(textchars, vocab, args.sort)
+
+    # Otherwise we just want a list of known/unknown characters in the text
+    else:
+        print_unknown_words(textchars, vocab)
