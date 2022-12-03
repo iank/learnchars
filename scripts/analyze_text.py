@@ -11,8 +11,7 @@ import argparse
 import math
 from pathlib import Path
 from learnchars.skritter import Skritter
-from learnchars.textfile import analyze_frequency
-from learnchars.textfile import count_characters
+from learnchars.textfile import Textfile
 from learnchars.chars import get_character_rank
 from learnchars.chars import str_progress
 
@@ -31,7 +30,7 @@ def print_needed_chars(textfile, percent, textchars, vocab):
     if percent < 0 or percent > 1:
         sys.exit("percent should be between 0-1 (inclusive)")
 
-    charcount = count_characters(textfile)
+    charcount = textfile.count_characters()
     must_know = math.ceil(charcount * percent)
 
     print("Input file contains {} total characters".format(charcount))
@@ -107,12 +106,13 @@ if __name__ == '__main__':
     vocab = Skritter(args.filename)
 
     # Analyze text file
-    textchars = analyze_frequency(args.textfile)
+    textfile = Textfile(args.textfile)
+    textchars = textfile.analyze_frequency()
 
     # Show the characters that would be needed to learn in order to
     # reach args.percent% *character* coverage of the given text.
     if args.percent:
-        highlight_chars = print_needed_chars(args.textfile, args.percent, textchars, vocab)
+        highlight_chars = print_needed_chars(textfile, args.percent, textchars, vocab)
         if args.highlight:
             (_, progress) = str_progress(vocab.chars, 2000, True, highlight=highlight_chars)
             print(progress)

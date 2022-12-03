@@ -1,7 +1,7 @@
 import os
 import pytest
-from learnchars.textfile import analyze_frequency
-from learnchars.textfile import count_characters
+from learnchars.textfile import Textfile
+from learnchars.skritter import Skritter
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
@@ -23,9 +23,12 @@ def test_textfile(datafiles):
     expected_chars = {'我': 4, '学': 2, '习': 1, '中': 3, '文': 3, '喜': 2, '欢': 2}
 
     assert (datafiles / 'textfile.txt').check(file=1)
-    textchars = analyze_frequency((datafiles / 'textfile.txt'))
+
+    textfile = Textfile(datafiles / 'textfile.txt')
+    textchars = textfile.analyze_frequency()
     assert textchars.keys() == expected_chars.keys()
 
+    # Ensure they are in order
     current_count = 4
     for char, count in textchars.items():
         assert count == expected_chars[char]
@@ -44,5 +47,28 @@ def test_count_characters(datafiles):
     expected_count = 17
 
     assert (datafiles / 'textfile.txt').check(file=1)
-    charcount = count_characters((datafiles / 'textfile.txt'))
+
+    textfile = Textfile(datafiles / 'textfile.txt')
+    charcount = textfile.count_characters()
     assert charcount == expected_count
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'textfile.txt'),
+    os.path.join(FIXTURE_DIR, 'textfile_vocab.tsv'),
+)
+def test_unknown(datafiles):
+    """
+    This test demonstrates that the module correctly identifies unknown characters
+    """
+    expected_chars = {'我': 4, '习': 1, '文': 3}
+
+    assert (datafiles / 'textfile.txt').check(file=1)
+    assert (datafiles / 'textfile_vocab.tsv').check(file=1)
+
+    vocab = Skritter(datafiles / 'textfile_vocab.tsv')
+
+    textfile = Textfile(datafiles / 'textfile.txt')
+    textchars = textfile.unknown_characters(vocab)
+
+    assert textchars == expected_chars
