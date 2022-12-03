@@ -191,19 +191,15 @@ Update vocabulary list from Skritter.
 
 # Docker
 
-Included is a Dockerfile that builds an image with the package installed in a virtual environment.
+Included is a Dockerfile that builds an image with the package installed in a virtual environment. This image is available on Docker Hub at [iank1/learnchars:latest](https://hub.docker.com/r/iank1/learnchars).
 
-TODO
-- script in docker: update vocab list + regenerate images
-- docker-compose [ofelia](https://viktorsapozhok.github.io/docker-python-ofelia/)
-- docker-compose provision skritter credentials
-- docker-compose serve images
-
-Warning: Docker image shouldn't ever need the Skritter PW, but currently it does. A better thing to do would be make use of oauth and authenticate once manually, then have the docker image refresh the token.
+The docker-compose.yaml uses the above image along with a task scheduler and a webserver to generate regenerate Kindle screensaver progress images from a fresh vocabulary list every 24 hours. Example:
 
 ```
 SKRITTER_USERNAME=example SKRITTER_PW=example docker-compose up
 ```
+
+Warning: The docker image shouldn't ever need the Skritter PW, but currently it does. A better thing to do would be to make use of oauth and authenticate once manually, then have the docker image refresh the token.
 
 # License/attribution
 
