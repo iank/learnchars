@@ -196,7 +196,7 @@ Included is a Dockerfile that builds an image with the package installed in a vi
 The docker-compose.yaml uses the above image along with a task scheduler and a webserver to generate regenerate Kindle screensaver progress images from a fresh vocabulary list every 24 hours. Example:
 
 ```
-SKRITTER_USERNAME=example SKRITTER_PW=example docker-compose up
+SKRITTER_USERNAME=example SKRITTER_PW=example docker compose up -d
 ```
 
 Warning: The docker image shouldn't ever need the Skritter PW, but currently it does. A better thing to do would be to make use of oauth and authenticate once manually, then have the docker image refresh the token.
