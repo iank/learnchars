@@ -33,7 +33,7 @@ When I learn a word I like to add a sentence containing that word to an Anki dec
 
 Optionally, ``analyze_text.py`` can limit its display to the most frequent characters that would be needed to reach a given percent character coverage; e.g., display only the characters that would be needed to learn to know 98% of the characters in an average sentence/page/chapter of that text. There's a long tail in any given actual text and characters with one or two occurrences can be looked up once and forgotten, for now. So I don't wait until 100% coverage before reading.
 
-Finally, ``analyze_text.py`` can display characters in order of Jun Da's frequency rank rather than frequency in the text. This option also omits characters which only occur once in the text. The idea here is to learn characters that are more generally useful, while also targeting a particular book as a background goal.
+Finally, ``analyze_text.py`` can display characters in order of [Jun Da's frequency list for Modern Chinese](https://lingua.mtsu.edu/chinese-computing/statistics/) rather than frequency in the text. This option also omits characters which only occur once in the text. The idea here is to learn characters that are more generally useful, while also targeting a particular book as a background goal.
 
 ``progress.py`` is a visual indication of progress. It's just for fun. See examples below.
 
@@ -258,7 +258,7 @@ Note that (at least on this Kindle) cron is busybox cron. To reload the crontab,
 
 Please see [wordfreq](https://github.com/rspeer/wordfreq) for information about licensing and attribution for the data sources distributed with that module.
 
-Character frequency data from https://lingua.mtsu.edu/chinese-computing/statistics/char/list.php?Which=MO
+Character frequency data from https://lingua.mtsu.edu/chinese-computing/statistics/
 
 There is an HSK word list from [Cédric Hartland](http://cedric.hartland.free.fr/) distributed with this module. It has a CC BY-NC license.
 
