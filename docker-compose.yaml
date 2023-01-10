@@ -28,6 +28,7 @@ services:
 
   nginx:
     image: nginx:alpine
+    restart: unless-stopped
     ports:
       - 7999:80
     volumes:
